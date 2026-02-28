@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cloudambassadors-app
+  name: my-docker-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: cloudambassadors-app
+      app: my-docker-app
   template:
     metadata:
       labels:
-        app: cloudambassadors-app
+        app: my-docker-app
     spec:
       containers:
-      - name: app
-        image: asia-south1-docker.pkg.dev/internal-sandbox-446612/cloudambassadors-repo/app:latest
+      - name: my-docker-app
+        image: asia-south1-docker.pkg.dev/internal-sandbox-446612/my-docker-repo/my-docker-app:latest
         ports:
         - containerPort: 5000
