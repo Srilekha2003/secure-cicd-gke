@@ -17,7 +17,7 @@ jobs:
 
     - uses: google-github-actions/auth@v2
       with:
-        workload_identity_provider: "projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+        workload_identity_provider: "projects/196053730058/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
         service_account: "github-runner-sa@internal-sandbox-446612.iam.gserviceaccount.com"
 
     - uses: google-github-actions/setup-gcloud@v2
@@ -31,9 +31,9 @@ jobs:
         gcloud auth configure-docker asia-south1-docker.pkg.dev
 
     - run: |
-        docker build -t asia-south1-docker.pkg.dev/PROJECT_ID/cloudambassadors-repo/app:${{ github.sha }} .
-        docker push asia-south1-docker.pkg.dev/PROJECT_ID/cloudambassadors-repo/app:${{ github.sha }}
+        docker build -t asia-south1-docker.pkg.dev/internal-sandbox-446612/cloudambassadors-repo/app:${{ github.sha }} .
+        docker push asia-south1-docker.pkg.dev/internal-sandbox-446612/cloudambassadors-repo/app:${{ github.sha }}
 
     - run: |
-        kubectl set image deployment/cloudambassadors-app app=asia-south1-docker.pkg.dev/PROJECT_ID/cloudambassadors-repo/app:${{ github.sha }}
+        kubectl set image deployment/cloudambassadors-app app=asia-south1-docker.pkg.dev/internal-sandbox-446612/cloudambassadors-repo/app:${{ github.sha }}
         kubectl rollout status deployment/cloudambassadors-app
