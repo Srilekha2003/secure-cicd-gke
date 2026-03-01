@@ -1,13 +1,10 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY app.py /app/
 
-COPY app.py .
-
-ENV APP_VERSION=v1
+RUN pip install flask
 
 EXPOSE 5000
 
