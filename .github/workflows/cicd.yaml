@@ -31,9 +31,9 @@ jobs:
         gcloud auth configure-docker asia-south1-docker.pkg.dev
 
     - run: |
-        docker build -t asia-south1-docker.pkg.dev/internal-sandbox-446612/cloudambassadors-repo/app:${{ github.sha }} .
-        docker push asia-south1-docker.pkg.dev/internal-sandbox-446612/cloudambassadors-repo/app:${{ github.sha }}
+        docker build -t asia-south1-docker.pkg.dev/internal-sandbox-446612/my-docker-repo/my-docker-app:${{ github.sha }} .
+        docker push asia-south1-docker.pkg.dev/internal-sandbox-446612/my-docker-repo/my-docker-app:${{ github.sha }}
 
     - run: |
-        kubectl set image deployment/cloudambassadors-app app=asia-south1-docker.pkg.dev/internal-sandbox-446612/cloudambassadors-repo/app:${{ github.sha }}
-        kubectl rollout status deployment/cloudambassadors-app
+        kubectl set image deployment/my-docker-app my-docker-app=asia-south1-docker.pkg.dev/internal-sandbox-446612/my-docker-repo/my-docker-app:${{ github.sha }}
+        kubectl rollout status deployment/my-docker-app
