@@ -5,9 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    version = os.getenv("APP_VERSION", "v1")
-
-    return f"""
+    return """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,19 +16,19 @@ def home():
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {{
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:'Poppins',sans-serif;
-}}
-
-body {{
+}
+body{
     background:#f4f7fa;
     scroll-behavior:smooth;
-}}
+}
 
-header {{
+/* ================= NAVBAR ================= */
+header{
     position:fixed;
     width:100%;
     top:0;
@@ -42,9 +40,39 @@ header {{
     background:linear-gradient(135deg,#0d6efd,#6610f2);
     color:white;
     z-index:1000;
-}}
+    transition:0.3s;
+}
+header.scrolled{
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
+    font-weight:700;
+}
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:30px;
+}
+nav ul li a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+}
+nav ul li a:hover{
+    opacity:0.7;
+}
+.menu-toggle{
+    display:none;
+    font-size:26px;
+    cursor:pointer;
+}
 
-.hero {{
+/* ================= HERO ================= */
+.hero{
     height:100vh;
     background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center/cover;
     display:flex;
@@ -53,44 +81,223 @@ header {{
     text-align:center;
     color:white;
     position:relative;
-}}
+    overflow:hidden;
+}
+.hero::after{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:rgba(255,255,255,0.05);
+    top:0;
+    left:-50%;
+    animation:waterFlow 25s linear infinite;
+}
+@keyframes waterFlow{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
+}
+.hero h1{
+    font-size:55px;
+    z-index:2;
+}
 
-@keyframes waterFlow {{
-    from {{ transform: rotate(0deg); }}
-    to   {{ transform: rotate(360deg); }}
-}}
+/* ================= SECTIONS ================= */
+section{
+    padding:120px 80px;
+}
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+    font-size:38px;
+    font-weight:700;
+    background:linear-gradient(45deg,#0d6efd,#6610f2);
+    -webkit-background-clip:text;
+    color:transparent;
+}
 
-.version-badge {{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#0d6efd;
+/* ================= TOP EXPERIENCES ================= */
+.carousel{
+    position:relative;
+    overflow:hidden;
+    border-radius:20px;
+}
+.carousel-container{
+    display:flex;
+    transition:0.8s ease;
+}
+.slide{
+    min-width:100%;
+    position:relative;
+}
+.slide img{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+}
+.slide-text{
+    position:absolute;
+    bottom:40px;
+    left:40px;
+    font-size:32px;
     color:white;
-    padding:10px 15px;
+    background:rgba(0,0,0,0.5);
+    padding:15px 30px;
     border-radius:10px;
-    font-weight:bold;
-    box-shadow:0 5px 15px rgba(0,0,0,0.3);
-}}
+}
+.carousel-buttons{
+    position:absolute;
+    top:50%;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    transform:translateY(-50%);
+    padding:0 20px;
+}
+.carousel-buttons button{
+    background:rgba(255,255,255,0.4);
+    border:none;
+    padding:10px 20px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+/* ================= DESTINATIONS ================= */
+.destinations{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    transition:0.4s;
+}
+.card:hover{
+    transform:translateY(-10px);
+}
+.card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+.card-content{
+    padding:20px;
+}
+
+/* ================= TESTIMONIALS ================= */
+.testimonials{
+    background:linear-gradient(135deg,#0d6efd,#6610f2);
+    color:white;
+}
+.testimonial-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+.testimonial-card{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    padding:30px;
+    border-radius:20px;
+}
+
+/* ================= PACKAGES ================= */
+.packages{
+    text-align:center;
+}
+.package-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+.package-card{
+    background:white;
+    padding:40px 20px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    transition:0.4s;
+}
+.package-card:hover{
+    transform:translateY(-10px);
+}
+.package-card h2{
+    font-size:28px;
+    color:#0d6efd;
+    margin-bottom:15px;
+}
+
+/* ================= FOOTER ================= */
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+    nav ul{
+        position:absolute;
+        top:70px;
+        right:0;
+        background:#0d6efd;
+        flex-direction:column;
+        width:200px;
+        display:none;
+        padding:20px;
+    }
+    nav ul.active{
+        display:flex;
+    }
+    .menu-toggle{
+        display:block;
+    }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<div style="font-size:22px;font-weight:700;">✈️ TravelX</div>
+<div class="logo">✈️ TravelX</div>
+
+<nav>
+<ul id="menu">
+<li><a href="#home">Home</a></li>
+<li><a href="#experiences">Experiences</a></li>
+<li><a href="#destinations">Destinations</a></li>
+<li><a href="#pricing">Packages</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</nav>
 </header>
 
-<section class="hero">
+<section class="hero" id="home">
 <h1>Experience The Beauty of The Ocean 🌊</h1>
 </section>
 
-<div class="version-badge">
-Running Version: {version}
-</div>
+<footer id="contact">
+© 2026 TravelX | Designed with  @cloudambassadorsteam
+</footer>
+
+<script>
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("active");
+}
+
+window.addEventListener("scroll", function(){
+document.querySelector("header").classList.toggle("scrolled", window.scrollY > 50);
+});
+</script>
 
 </body>
 </html>
 """
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
