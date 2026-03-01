@@ -93,10 +93,6 @@ nav ul li a:hover{
     left:-50%;
     animation:waterFlow 25s linear infinite;
 }
-@keyframes waterFlow{
-    from{ transform:rotate(0deg); }
-    to{ transform:rotate(360deg); }
-}
 .hero h1{
     font-size:55px;
     z-index:2;
