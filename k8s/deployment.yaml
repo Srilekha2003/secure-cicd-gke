@@ -13,7 +13,7 @@ spec:
         app: my-docker-app
     spec:
       containers:
-      - name: my-docker-app
-        image: asia-south1-docker.pkg.dev/internal-sandbox-446612/my-docker-repo/my-docker-app:v4
-        ports:
-          - containerPort: 5000
+        - name: my-docker-app
+          image: asia-south1-docker.pkg.dev/internal-sandbox-446612/my-docker-repo/my-docker-app:v4
+          ports:
+            - containerPort: 5000
