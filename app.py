@@ -263,7 +263,7 @@ footer{
 <body>
 
 <header>
-<div class="logo">✈️ TravelGoa</div>
+<div class="logo">✈️ TravelX</div>
 
 <nav>
 <ul id="menu">
